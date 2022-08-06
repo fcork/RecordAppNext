@@ -4,7 +4,7 @@ import { TextField, Button, Link, Box, Paper, Card, CardContent } from "@mui/mat
 import { ConsoleWriter } from "istanbul-lib-report";
 
 const AddAlbum = () => {
-  console.log(process.env.NODE_ENV)
+  console.log(process.env.MONGODB_URI)
   const [albumText, setAlbumText] = useState("")
   const [artistText, setArtistText] = useState("")
 
