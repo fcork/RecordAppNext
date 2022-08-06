@@ -7,7 +7,7 @@ const AddAlbum = () => {
   const [albumText, setAlbumText] = useState("")
   const [artistText, setArtistText] = useState("")
 
-  const handlePost = async (e) => {
+  const handlePost = async (e: any) => {
     e.preventDefault();
 
     let album = {

@@ -35,21 +35,21 @@ const About: NextPage = ({albumData}: any) => {
   // }, []);
 
   
-  const handlePost = async (e) => {
-    e.preventDefault();
+//   const handlePost = async (e) => {
+//     e.preventDefault();
 
-    let album = {
-        albumName: 'Revolver',
-        artistName: 'The Beatles'
-    };
-    // save the post
-    let response = await fetch('/api/albums');
+//     let album = {
+//         albumName: 'Revolver',
+//         artistName: 'The Beatles'
+//     };
+//     // save the post
+//     let response = await fetch('/api/albums');
 
-    // get the data
-    let data = await response.json();
-    setAlbumList(data.message)
-    return data
-};
+//     // get the data
+//     let data = await response.json();
+//     setAlbumList(data.message)
+//     return data
+// };
 
 const displayedAlbums = albumData.map((album) => 
   <Grid item xs={6} key={album._id}>
