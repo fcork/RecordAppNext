@@ -7,6 +7,8 @@ import ProTip from '../src/ProTip';
 import Copyright from '../src/Copyright';
 
 const Home = () => {
+  console.log('win', window.location.origin)
+
   return (
     <Container maxWidth="lg">
       <Box
