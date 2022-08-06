@@ -20,6 +20,7 @@
     "@mui/material": "latest",
     "mongodb": "^4.8.1",
     "next": "latest",
+    "next-absolute-url": "^1.2.2",
     "react": "latest",
     "react-dom": "latest"
   },

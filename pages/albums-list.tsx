@@ -9,10 +9,13 @@ import SearchBox from '../src/components/SearchBox';
 import CustomButton from '../src/components/CustomButton';
 import GridView from '../src/components/GridView';
 import ListView from '../src/components/ListView';
+import absoluteUrl from 'next-absolute-url'
 
 
-export async function getServerSideProps() {
-  const res = await fetch(`http://localhost:3004/api/albums`)
+export async function getServerSideProps({req}: any) {
+  const { origin } = absoluteUrl(req)
+  console.log('origin', origin)
+  const res = await fetch(`${origin}/api/albums`)
   const newData = await res.json()
   return {
     props: {
@@ -22,6 +25,7 @@ export async function getServerSideProps() {
 }
 
 const About = ({albumData}: any) => {
+  console.log('win', window.location.origin)
   const [albumList, setAlbumList] = useState([])
   // useEffect(() => {
   //   const fetchData = async () => {
