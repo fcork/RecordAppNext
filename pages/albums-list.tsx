@@ -25,6 +25,7 @@ export async function getServerSideProps({req}: any) {
 }
 
 const About = ({albumData}: any) => {
+  console.log('win', window.location.origin)
   const [albumList, setAlbumList] = useState([])
   // useEffect(() => {
   //   const fetchData = async () => {
