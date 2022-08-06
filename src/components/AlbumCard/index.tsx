@@ -34,7 +34,6 @@ const AlbumCard: React.FC<Props> = ({ imageFile, isStoryBook, albumInfo }) => {
           <CardContent sx={{pb: 1.5}}>
             {isStoryBook ? (
               <img
-                priority
                 src={imageFile}
                 height={144}
                 width={144}
@@ -42,7 +41,7 @@ const AlbumCard: React.FC<Props> = ({ imageFile, isStoryBook, albumInfo }) => {
               />
             ) : (
               <Image
-                sx={{ display: "flex" }}
+                style={{ display: "flex" }}
                 priority
                 src={imageFile}
                 height={144}

@@ -9,7 +9,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 interface Props {
   icon?: string,
   onClick?: React.MouseEventHandler,
-  children: React.ReactNode
+  children: React.ReactNode,
+  [x: string]: any
 }
 
 interface iconsInt {
