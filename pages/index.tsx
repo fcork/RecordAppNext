@@ -7,7 +7,7 @@ import Link from '../src/Link';
 import ProTip from '../src/ProTip';
 import Copyright from '../src/Copyright';
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
     <Container maxWidth="lg">
       <Box

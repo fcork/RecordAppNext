@@ -22,7 +22,7 @@ export async function getServerSideProps() {
   }; 
 }
 
-const About: NextPage = ({albumData}: any) => {
+const About = ({albumData}: any) => {
   const [albumList, setAlbumList] = useState([])
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -51,7 +51,7 @@ const About: NextPage = ({albumData}: any) => {
 //     return data
 // };
 
-const displayedAlbums = albumData.map((album) => 
+const displayedAlbums = albumData.map((album: any) => 
   <Grid item xs={6} key={album._id}>
     <AlbumCard imageFile="/images/PetSoundsCover.jpg" albumInfo={album}/>
   </Grid>
