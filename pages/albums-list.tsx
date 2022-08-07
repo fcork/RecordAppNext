@@ -76,9 +76,6 @@ const displayedAlbums = albumData.map((album: any) =>
         <Typography style={{ fontSize: '2.5rem', fontWeight: '1000', lineHeight: '20px' }} gutterBottom>
           Franks Albums
         </Typography>
-          {/* <Button fullWidth variant="contained" component={Link} noLinkStyle href="/">
-            Go to the home page
-          </Button> */}
         </Box>
 
         <Grid
