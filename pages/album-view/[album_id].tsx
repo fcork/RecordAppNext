@@ -16,24 +16,6 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 interface Props {}
 
-interface StateType {
-  albumData: {
-    artistName: string,
-    albumName: string,
-    genre: string,
-    length: string,
-    releaseDate: string,
-    pricePaid: string,
-    label: string,
-    deadWaxInfo: string,
-    pressingYear: string,
-    country: string,
-    notes: string,
-    discogsUrl: string
-  }
-
-}
-
 export async function getServerSideProps(context: any) {
   // let dev = process.env.NODE_ENV !== "production";
   // let { DEV_URL, PROD_URL } = process.env;
@@ -51,7 +33,20 @@ export async function getServerSideProps(context: any) {
 }
 
 const albumView: React.FC<Props> = ({ id }: any) => {
-  const [albumData, setAlbum] = useState<StateType>({});
+  const [albumData, setAlbum] = useState({
+    artistName: "",
+    albumName: "",
+    genre: "",
+    length: "",
+    releaseDate: "",
+    pricePaid: "",
+    label: "",
+    deadWaxInfo: "",
+    pressingYear: "",
+    country: "",
+    notes: "",
+    discogsUrl: ""
+  });
 
   useEffect(() => {
     const fetchData = async () => {
