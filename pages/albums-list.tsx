@@ -10,6 +10,7 @@ import CustomButton from "../src/components/CustomButton";
 import GridView from "../src/components/GridView";
 import ListView from "../src/components/ListView";
 import Link from "next/link";
+import AlbumCardList from "../src/components/AlbumCardList";
 
 export async function getServerSideProps() {
   let dev = process.env.NODE_ENV !== "production";
@@ -26,6 +27,8 @@ export async function getServerSideProps() {
 
 const About = ({ albumData }: any) => {
   const [albumList, setAlbumList] = useState([]);
+  const [isGrid, setIsGrid] = useState(true);
+  const [grid, setGrid] = useState({isGrid: true, gridColor: "primary", listColor: "secondary"});
   // useEffect(() => {
   //   const fetchData = async () => {
   //     const response = await fetch(`api/albums`);
@@ -52,13 +55,34 @@ const About = ({ albumData }: any) => {
   //     return data
   // };
 
-  const displayedAlbums = albumData.map((album: any) => (
-    <Link href={`/album-view/${album._id}`}>
-        <Grid item xs={6} key={album._id}>
-      <AlbumCard imageFile="/images/PetSoundsCover.jpg" albumInfo={album} />
-    </Grid>
+  const displayedGridAlbums = albumData.map((album: any) => (
+    <Link href={`/album-view/${album._id}`} key={album._id}>
+      <Grid item xs={6}>
+        <AlbumCard imageFile="/images/PetSoundsCover.jpg" albumInfo={album} />
+      </Grid>
     </Link>
- ));
+  ));
+
+  const displayedListAlbums = albumData.map((album: any) => (
+    <Link href={`/album-view/${album._id}`} key={album._id}>
+      <Grid item xs={12} sm={6} md={4}>
+        <AlbumCardList
+          imageFile="/images/PetSoundsCover.jpg"
+          albumInfo={album}
+        />
+      </Grid>
+    </Link>
+  ));
+
+  const displayedAlbums = grid.isGrid ? displayedGridAlbums : displayedListAlbums
+
+  const toggleList = () => {
+    setGrid({isGrid: false, gridColor: "secondary", listColor: "primary"})
+  }
+
+  const toggleGrid = () => {
+    setGrid({isGrid: true, gridColor: "primary", listColor: "secondary"})
+  }
 
   return (
     <Container maxWidth="lg">
@@ -96,19 +120,17 @@ const About = ({ albumData }: any) => {
           </Grid>
           <Grid item>
             <Link href="/">
-              <CustomButton icon="filter">
-                Filter
-              </CustomButton>
+              <CustomButton icon="filter">Filter</CustomButton>
             </Link>
           </Grid>
         </Grid>
 
         <Grid container justifyContent="flex-end">
           <Grid item>
-            <GridView />
+            <GridView color={grid.gridColor} handleClick={toggleGrid} />
           </Grid>
           <Grid item>
-            <ListView />
+            <ListView color={grid.listColor} handleClick={toggleList} />
           </Grid>
         </Grid>
 

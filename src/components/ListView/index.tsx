@@ -4,9 +4,10 @@ import IconButton from '@mui/material/IconButton';
 
 
 const ListView = (props: any) => {
+  const { handleClick, color } = props
 
   return (
-    <IconButton color="secondary">
+    <IconButton color={color} onClick={ handleClick }>
       <ListIcon />
     </IconButton>
     

@@ -21,10 +21,10 @@ const Home = () => {
         <Typography variant="h4" component="h1" gutterBottom>
           MUI v5 + Next.js with TypeScript example
         </Typography>
-        <Link href="/albums-list" color="secondary">
+        <Link href="/albums-list" color="primary">
           Go to the album page
         </Link>
-        <Link href="/addAlbum" color="secondary">
+        <Link href="/addAlbum" color="primary">
           Add an album
         </Link>
         <ProTip />

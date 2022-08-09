@@ -5,10 +5,10 @@ import IconButton from '@mui/material/IconButton';
 
 
 const GridView = (props: any) => {
-
+  const { handleClick, color } = props
 
   return (
-    <IconButton color="secondary" onClick={() => alert('hello')}>
+    <IconButton color={color} onClick={handleClick}>
        <AppsIcon />
     </IconButton>
    
