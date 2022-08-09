@@ -5,11 +5,11 @@ export default async function handler(req, res) {
     // switch the methods
     switch (req.method) {
         case 'GET': {
-            return getPosts(req, res);
+            return getAlbums(req, res);
         }
 
         case 'POST': {
-            return addPost(req, res);
+            return addAlbum(req, res);
         }
 
         case 'PUT': {
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
 }
 
 // Getting all posts.
-async function getPosts(req, res) {
+async function getAlbums(req, res) {
     try {
         let { db } = await connectToDatabase();
         let posts = await db
@@ -44,7 +44,8 @@ async function getPosts(req, res) {
 }
 
 // Adding a new post
-async function addPost(req, res) {
+async function addAlbum(req, res) {
+    console.log('reqq',req.body)
     try {
         let { db } = await connectToDatabase();
         await db.collection('TestCollection').insertOne(JSON.parse(req.body));
