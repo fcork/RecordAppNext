@@ -33,7 +33,20 @@ export async function getServerSideProps(context: any) {
 }
 
 const albumView: React.FC<Props> = ({ id }: any) => {
-  const [albumData, setAlbum] = useState({});
+  const [albumData, setAlbum] = useState({
+    artistName: "",
+    albumName: "",
+    genre: "",
+    length: "",
+    releaseDate: "",
+    pricePaid: "",
+    label: "",
+    deadWaxInfo: "",
+    pressingYear: "",
+    country: "",
+    notes: "",
+    discogsUrl: ""
+  });
 
   useEffect(() => {
     const fetchData = async () => {
