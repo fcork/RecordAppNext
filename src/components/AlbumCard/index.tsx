@@ -6,20 +6,27 @@ import {
   CardContent,
   CardActionArea,
   Box,
-  Typography
+  Typography,
+  Skeleton
 } from "@mui/material/";
 import Image from "next/image";
 
 interface Props {
-  imageFile: string,
-  isStoryBook?: boolean,
+  imageFile: string;
+  isStoryBook?: boolean;
   albumInfo: {
-    artistName: string,
-    albumName: string
-  }
+    artistName: string;
+    albumName: string;
+  };
+  skeleton: boolean;
 }
 
-const AlbumCard: React.FC<Props> = ({ imageFile, isStoryBook, albumInfo }) => {
+const AlbumCard: React.FC<Props> = ({
+  imageFile,
+  isStoryBook,
+  albumInfo,
+  skeleton
+}) => {
   return (
     <>
       <Card sx={{ border: "none", boxShadow: "none" }}>
@@ -30,29 +37,58 @@ const AlbumCard: React.FC<Props> = ({ imageFile, isStoryBook, albumInfo }) => {
             flexDirection: "column"
           }}
         >
-
-          <CardContent sx={{pb: 1.5}}>
-            {isStoryBook ? (
-              <img
-                src={imageFile}
-                height={144}
-                width={144}
-                alt="StorybookAlt"
-              />
-            ) : (
-              <Image
-                style={{ display: "flex" }}
-                priority
-                src={imageFile}
-                height={144}
-                width={144}
-                alt="AppAlt"
-              />
-            )}
-          </CardContent>
-
-          <CardContent sx={{pl: 2, pt: 0, pb: .5}}>{albumInfo.artistName}</CardContent>
-          <CardContent sx={{pl: 2, pt: 0}}>{albumInfo.albumName}</CardContent>
+          {skeleton ? (
+            <Skeleton
+              animation="wave"
+              variant="rectangular"
+              width={144}
+              height={144}
+            />
+          ) : (
+            <CardContent sx={{ pb: 1.5 }}>
+              {isStoryBook ? (
+                <img
+                  src={imageFile}
+                  height={144}
+                  width={144}
+                  alt="StorybookAlt"
+                />
+              ) : (
+                <Image
+                  style={{ display: "flex" }}
+                  priority
+                  src={imageFile}
+                  height={144}
+                  width={144}
+                  alt="AppAlt"
+                />
+              )}
+            </CardContent>
+          )}
+          {skeleton ? (
+            <Skeleton
+              // animation="wave"
+              variant="text"
+              sx={{ fontSize: "1rem" }}
+              width={120}
+            />
+          ) : (
+            <CardContent sx={{ pl: 2, pt: 0, pb: 0.5 }}>
+              {albumInfo.artistName}
+            </CardContent>
+          )}
+          {skeleton ? (
+            <Skeleton
+              // animation="wave"
+              variant="text"
+              sx={{ fontSize: "1rem" }}
+              width={100}
+            />
+          ) : (
+            <CardContent sx={{ pl: 2, pt: 0 }}>
+              {albumInfo.albumName}
+            </CardContent>
+          )}
         </CardActionArea>
       </Card>
     </>

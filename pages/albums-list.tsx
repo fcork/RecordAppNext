@@ -12,32 +12,38 @@ import ListView from "../src/components/ListView";
 import Link from "next/link";
 import AlbumCardList from "../src/components/AlbumCardList";
 
-export async function getServerSideProps() {
-  let dev = process.env.NODE_ENV !== "production";
-  let { DEV_URL, PROD_URL } = process.env;
+// export async function getServerSideProps() {
+//   let dev = process.env.NODE_ENV !== "production";
+//   let { DEV_URL, PROD_URL } = process.env;
 
-  const res = await fetch(`${dev ? DEV_URL : PROD_URL}/api/albums`);
-  const newData = await res.json();
-  return {
-    props: {
-      albumData: newData.message
-    }
-  };
-}
+//   const res = await fetch(`${dev ? DEV_URL : PROD_URL}/api/albums`);
+//   const newData = await res.json();
+//   return {
+//     props: {
+//       albumData: newData.message
+//     }
+//   };
+// }
 
-const About = ({ albumData }: any) => {
+const About = () => {
   const [albumList, setAlbumList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [isGrid, setIsGrid] = useState(true);
-  const [grid, setGrid] = useState({isGrid: true, gridColor: "primary", listColor: "secondary"});
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await fetch(`api/albums`);
-  //     const newData = await response.json();
-  //     setAlbumList(newData.message)
-  //   };
+  const [grid, setGrid] = useState({
+    isGrid: true,
+    gridColor: "primary",
+    listColor: "secondary"
+  });
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`api/albums`);
+      const newData = await response.json();
+       await setIsLoading(false);
+      setAlbumList(newData.message);
+    };
 
-  //   fetchData();
-  // }, []);
+    fetchData();
+  }, []);
 
   //   const handlePost = async (e) => {
   //     e.preventDefault();
@@ -55,15 +61,15 @@ const About = ({ albumData }: any) => {
   //     return data
   // };
 
-  const displayedGridAlbums = albumData.map((album: any) => (
+  const displayedGridAlbums = albumList.map((album: any) => (
     <Link href={`/album-view/${album._id}`} key={album._id}>
       <Grid item xs={6}>
-        <AlbumCard imageFile="/images/PetSoundsCover.jpg" albumInfo={album} />
+        <AlbumCard imageFile="/images/PetSoundsCover.jpg" albumInfo={album} skeleton={true} />
       </Grid>
     </Link>
   ));
 
-  const displayedListAlbums = albumData.map((album: any) => (
+  const displayedListAlbums = albumList.map((album: any) => (
     <Link href={`/album-view/${album._id}`} key={album._id}>
       <Grid item xs={12} sm={6} md={4}>
         <AlbumCardList
@@ -74,15 +80,17 @@ const About = ({ albumData }: any) => {
     </Link>
   ));
 
-  const displayedAlbums = grid.isGrid ? displayedGridAlbums : displayedListAlbums
+  const displayedAlbums = grid.isGrid
+    ? displayedGridAlbums
+    : displayedListAlbums;
 
   const toggleList = () => {
-    setGrid({isGrid: false, gridColor: "secondary", listColor: "primary"})
-  }
+    setGrid({ isGrid: false, gridColor: "secondary", listColor: "primary" });
+  };
 
   const toggleGrid = () => {
-    setGrid({isGrid: true, gridColor: "primary", listColor: "secondary"})
-  }
+    setGrid({ isGrid: true, gridColor: "primary", listColor: "secondary" });
+  };
 
   return (
     <Container maxWidth="lg">
@@ -137,7 +145,7 @@ const About = ({ albumData }: any) => {
         {/* <ProTip />
         <Copyright /> */}
       </Box>
-      <Grid container>{albumData.length > 0 && displayedAlbums}</Grid>
+        <Grid container>{albumList.length > 0 && displayedAlbums}</Grid>
     </Container>
   );
 };
