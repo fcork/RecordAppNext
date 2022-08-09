@@ -32,7 +32,7 @@ const CustomButton: React.FC<Props> = (props: any) => {
       role="button"
       sx={{ padding: '16px', borderRadius: '8px' }}
       variant="contained"
-      color="secondary"
+      color="primary"
       fullWidth
       startIcon={currentIcon}
     >

@@ -14,7 +14,7 @@ const theme = createTheme({
       light: colors.backgroundGreen
     },
     secondary: {
-      main: '#19857b',
+      main: '#818B89',
     },
     error: {
       main: red.A400,
