@@ -64,7 +64,7 @@ const About = () => {
   const displayedGridAlbums = albumList.map((album: any) => (
     <Link href={`/album-view/${album._id}`} key={album._id}>
       <Grid item xs={6}>
-        <AlbumCard imageFile="/images/PetSoundsCover.jpg" albumInfo={album} skeleton={true} />
+        <AlbumCard imageFile="/images/PetSoundsCover.jpg" albumInfo={album} skeleton={isLoading} />
       </Grid>
     </Link>
   ));
