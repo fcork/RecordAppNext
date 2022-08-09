@@ -17,32 +17,32 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 interface Props {}
 
 export async function getServerSideProps(context: any) {
-  let dev = process.env.NODE_ENV !== "production";
-  let { DEV_URL, PROD_URL } = process.env;
+  // let dev = process.env.NODE_ENV !== "production";
+  // let { DEV_URL, PROD_URL } = process.env;
   const { album_id } = context.query;
 
-  const res = await fetch(
-    `${dev ? DEV_URL : PROD_URL}/api/album/?id=${album_id}`
-  );
-  const newData = await res.json();
+  // const res = await fetch(
+  //   `${dev ? DEV_URL : PROD_URL}/api/album/?id=${album_id}`
+  // );
+  // const newData = await res.json();
   return {
     props: {
-      albumData: newData.message
+      id: album_id
     }
   };
 }
 
-const albumView: React.FC<Props> = ({ albumData }: any) => {
-  const [album, setAlbum] = useState({});
+const albumView: React.FC<Props> = ({ id }: any) => {
+  const [albumData, setAlbum] = useState({});
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const res = await fetch(`/api/album/?id=${album_id}`);
-  //     const newData = await res.json();
-  //     setAlbum(newData.message)
-  //   }
-  //   fetchData()
-  // }, [])
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(`/api/album/?id=${id}`);
+      const newData = await res.json();
+      setAlbum(newData.message)
+    }
+    fetchData()
+  }, [])
 
   return (
     <Container maxWidth="md">
