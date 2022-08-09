@@ -65,7 +65,7 @@ const About = ({ albumData }: any) => {
 
   const displayedListAlbums = albumData.map((album: any) => (
     <Link href={`/album-view/${album._id}`} key={album._id}>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6} md={4}>
         <AlbumCardList
           imageFile="/images/PetSoundsCover.jpg"
           albumInfo={album}

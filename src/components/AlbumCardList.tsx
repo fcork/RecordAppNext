@@ -26,14 +26,18 @@ const AlbumCardList: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <Card sx={{ border: "none", boxShadow: "none" }}>
-        <CardActionArea>
-          <CardContent sx={{ pb: 1.5, display: "flex", justifyContent: "flex-start",flexDirection: "row"}}>
+      <Card sx={{ border: "none", boxShadow: "none"}}>
+        <CardActionArea
+          sx={{
+            pb: 1.5
+          }}
+        >
+          <CardContent sx={{display: "flex",}}>
             {isStoryBook ? (
               <img
                 src={imageFile}
-                height={144}
-                width={144}
+                height={116}
+                width={116}
                 alt="StorybookAlt"
               />
             ) : (
@@ -41,25 +45,25 @@ const AlbumCardList: React.FC<Props> = ({
                 style={{ display: "flex" }}
                 priority
                 src={imageFile}
-                height={144}
-                width={144}
+                height={116}
+                width={116}
                 alt="AppAlt"
               />
             )}
 
-            <CardContent sx={{paddingTop: "0", display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "flex-start", minHeight: "25%"}}>
-              <Typography>
-              {albumInfo.artistName}
-              </Typography>
-              <Typography>
-                {albumInfo.albumName}
-              </Typography>
-              
+            <CardContent
+              sx={{
+                paddingTop: "0",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                justifyContent: "flex-start"
+              }}
+            >
+              <Typography variant="h2">{albumInfo.artistName}</Typography>
+              <Typography variant="h2">{albumInfo.albumName}</Typography>
             </CardContent>
-
           </CardContent>
-
-
         </CardActionArea>
       </Card>
     </>
