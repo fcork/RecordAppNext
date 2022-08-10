@@ -63,14 +63,16 @@ async function addAlbum(req, res) {
 
 // Updating a post
 async function updatePost(req, res) {
+    const body = JSON.parse(req.body)
+    console.log('qqqq',JSON.parse(req.body))
     try {
         let { db } = await connectToDatabase();
 
         await db.collection('TestCollection').updateOne(
             {
-                _id: new ObjectId(req.body),
+                _id: new ObjectId(req.query),
             },
-            { $set: { published: true } }
+            { $set:  body  }
         );
 
         return res.json({

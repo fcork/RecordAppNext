@@ -5,7 +5,8 @@ import {
   Grid,
   Typography,
   Box,
-  Container
+  Container,
+  Button
 } from "@mui/material";
 import Image from "next/image";
 import CustomButton from "../../src/components/CustomButton";
@@ -45,7 +46,8 @@ const albumView: React.FC<Props> = ({ id }: any) => {
     pressingYear: "",
     country: "",
     notes: "",
-    discogsUrl: ""
+    discogsUrl: "",
+    albumArtworkUrl: ""
   });
 
   useEffect(() => {
@@ -55,7 +57,35 @@ const albumView: React.FC<Props> = ({ id }: any) => {
       setAlbum(newData.message)
     }
     fetchData()
+
   }, [])
+
+  const handleArt1 = async () => {
+    const releaseYear = albumData.releaseDate.slice(-4)
+    const artistString = albumData.artistName.split(' ').join('%20')
+    const response = await fetch(`https://api.spotify.com/v1/search?type=album&q=year:${releaseYear}%20artist:${artistString}`, {
+          method: 'GET', headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + accessToken
+          }
+      })
+
+          const newData = await response.json();
+     console.log('wwww',newData.albums.items[0].images[0].url)
+     const { url } = newData.albums.items[0].images[0]
+     await fetch(`/api/albums/?id=${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ albumArtworkUrl: url })
+  });
+
+  }
+
+  const handleArt = async () => {
+    const releaseYear = albumData.releaseDate.slice(-4)
+    const response = await fetch(`/api/artwork?artist=${albumData.artistName}&year=${releaseYear}`)
+    const newData = await response.json()
+  }
 
   return (
     <Container maxWidth="md">
@@ -89,8 +119,8 @@ const albumView: React.FC<Props> = ({ id }: any) => {
           </Typography>
         </Grid>
         <Grid item xs={10} sx={{ display: "flex", justifyContent: "center" }}>
-          <Image
-            src="/images/PetSoundsCover.jpg"
+          <img
+            src={albumData.albumArtworkUrl}
             height={324}
             width={324}
             alt="viewAlt"
@@ -148,6 +178,11 @@ const albumView: React.FC<Props> = ({ id }: any) => {
           >
             <CustomButton>View Discogs Link</CustomButton>
           </a>
+        </Grid>
+        <Grid>
+          <Button onClick={handleArt}>
+            Get Artwork
+          </Button>
         </Grid>
       </Grid>
     </Container>

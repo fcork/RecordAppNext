@@ -43,6 +43,35 @@ const About = () => {
     };
 
     fetchData();
+
+    // const NewFetchSpot = async () => {
+    //   const accessToken = "BQBUVcYEr1Yxu-ZOXN28nPKOGbP1B79zaKeKSa4r3k0J9nnc-RaSgli8lZbMxbVGpHBNQ4zdS506Witqtm04OmBBXJa4oG-Qeq1PHaJESOOUxHBvSDDlMhKFUhpQjxjuBvugd3zGeFiRLDXkngtp2-tSMjjyxKNevXPFsKkAChVUkfI"
+    //   const response = await fetch('https://api.spotify.com/v1/search?type=album&q=year:1968%20artist:The%20Rolling%20Stones', {
+    //         method: 'GET', headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json',
+    //             'Authorization': 'Bearer ' + accessToken
+    //         }
+    //     })
+
+    //         const newData = await response.json();
+    //    console.log('wwww',newData.albums.items)
+    // }
+
+    // NewFetchSpot()
+    // fetchSpotData();
+
+    // const fetchSpotData = async () => {      
+    //   const response = await fetch('https://api.spotify.com/v1/search?q=tania%20bowra&type=artist', {
+    //     headers: {
+    //       Authentication: token
+    //     }
+    //   })
+    //   const newData = await response.json();
+    //    console.log('wwww',newData)
+    // };
+
+    // fetchSpotData();
   }, []);
 
   //   const handlePost = async (e) => {
@@ -64,7 +93,7 @@ const About = () => {
   const displayedGridAlbums = albumList.map((album: any) => (
     <Link href={`/album-view/${album._id}`} key={album._id}>
       <Grid item xs={6}>
-        <AlbumCard imageFile="/images/PetSoundsCover.jpg" albumInfo={album} skeleton={isLoading} />
+        <AlbumCard imageFile={album.albumArtworkUrl} albumInfo={album} skeleton={isLoading} />
       </Grid>
     </Link>
   ));

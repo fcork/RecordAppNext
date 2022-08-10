@@ -54,9 +54,8 @@ const AlbumCard: React.FC<Props> = ({
                   alt="StorybookAlt"
                 />
               ) : (
-                <Image
+                <img
                   style={{ display: "flex" }}
-                  priority
                   src={imageFile}
                   height={144}
                   width={144}
