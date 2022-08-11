@@ -5,8 +5,14 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 interface Props {
   // handleOpen: () => boolean,
-  handleClose: () => void;
-  open: boolean;
+  handleClose: () => void,
+  open: boolean,
+  position: number,
+  arrayLength: number,
+  currentAlbum: string,
+  nextHandler: () => void,
+  previousHandler: () => void,
+  handleSubmit: () => void
 }
 
 const CustomModal: React.FC<Props> = ({ open, handleClose, nextHandler, previousHandler, position, handleSubmit, arrayLength, currentAlbum }: any) => {

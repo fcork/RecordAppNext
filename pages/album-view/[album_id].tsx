@@ -217,7 +217,7 @@ const albumView: React.FC<Props> = ({ id }: any) => {
               nextHandler={handleNextAlbum}
               previousHandler={handlePreviousAlbum}
               position={position}
-              handleSubmit={handleSubmitArtwork}
+              // handleSubmit={handleSubmitArtwork}
               currentAlbum={currentAlbum}
               arrayLength={albumsArray.length}
             />
