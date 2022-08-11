@@ -1,7 +1,14 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import AlbumCard from "../src/components/AlbumCard";
-import { Grid, Box, Button, Container, Typography } from "@mui/material";
+import {
+  Grid,
+  Box,
+  Button,
+  Container,
+  Typography,
+  TextField
+} from "@mui/material";
 import SearchBox from "../src/components/SearchBox";
 import CustomButton from "../src/components/CustomButton";
 import GridView from "../src/components/GridView";
@@ -23,9 +30,10 @@ import AlbumCardList from "../src/components/AlbumCardList";
 // }
 
 const About = () => {
+  const [unfilteredAlbumList, setUnfilteredAlbumList] = useState([])
   const [albumList, setAlbumList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isGrid, setIsGrid] = useState(true);
+  const [searchText, setSearchText] = useState("");
   const [grid, setGrid] = useState({
     isGrid: true,
     gridColor: "primary",
@@ -35,8 +43,9 @@ const About = () => {
     const fetchData = async () => {
       const response = await fetch(`api/albums`);
       const newData = await response.json();
-       await setIsLoading(false);
+      await setIsLoading(false);
       setAlbumList(newData.message);
+      setUnfilteredAlbumList(newData.message)
     };
 
     fetchData();
@@ -58,7 +67,7 @@ const About = () => {
     // NewFetchSpot()
     // fetchSpotData();
 
-    // const fetchSpotData = async () => {      
+    // const fetchSpotData = async () => {
     //   const response = await fetch('https://api.spotify.com/v1/search?q=tania%20bowra&type=artist', {
     //     headers: {
     //       Authentication: token
@@ -90,7 +99,11 @@ const About = () => {
   const displayedGridAlbums = albumList.map((album: any) => (
     <Link href={`/album-view/${album._id}`} key={album._id}>
       <Grid item xs={6}>
-        <AlbumCard imageFile={album.albumArtworkUrl} albumInfo={album} skeleton={isLoading} />
+        <AlbumCard
+          imageFile={album.albumArtworkUrl}
+          albumInfo={album}
+          skeleton={isLoading}
+        />
       </Grid>
     </Link>
   ));
@@ -98,10 +111,7 @@ const About = () => {
   const displayedListAlbums = albumList.map((album: any) => (
     <Link href={`/album-view/${album._id}`} key={album._id}>
       <Grid item xs={12} sm={6} md={4}>
-        <AlbumCardList
-          imageFile={album.albumArtworkUrl}
-          albumInfo={album}
-        />
+        <AlbumCardList imageFile={album.albumArtworkUrl} albumInfo={album} />
       </Grid>
     </Link>
   ));
@@ -117,6 +127,46 @@ const About = () => {
   const toggleGrid = () => {
     setGrid({ isGrid: true, gridColor: "primary", listColor: "secondary" });
   };
+
+  // const handleSearch = () => {
+  //   const result = unfilteredAlbumList.filter(
+  //     album =>
+  //       album.artistName.toLowerCase().includes(searchText) ||
+  //       album.albumName.toLowerCase().includes(searchText)
+  //   );
+  //   setAlbumList(result);
+  // };
+
+  const handleSearchChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    console.log(e.target.value)
+    await setSearchText(e.target.value.toLocaleLowerCase())
+    console.log('search',searchText)
+    // const result =  await unfilteredAlbumList.filter(
+    //   album =>
+    //     album.artistName.toLowerCase().includes(searchText) ||
+    //     album.albumName.toLowerCase().includes(searchText)
+    // );
+    // await setAlbumList(result);
+  
+  };
+
+  useEffect(() => {
+    const handleSearch = () => {
+      const result = unfilteredAlbumList.filter(
+        album =>
+          album.artistName.toLowerCase().includes(searchText) ||
+          album.albumName.toLowerCase().includes(searchText)
+      );
+      setAlbumList(result);
+    }
+      handleSearch()
+  }, [searchText])
+
+  const clearSearchBar = () => {
+    setAlbumList(unfilteredAlbumList)
+    setSearchText("")
+  }
 
   return (
     <Container maxWidth="lg">
@@ -150,8 +200,13 @@ const About = () => {
           alignItems="stretch"
         >
           <Grid item xs={12}>
-            <SearchBox />
+            <SearchBox
+              handleSearchChange={handleSearchChange}
+              searchText={searchText}
+              clearSearchBar={clearSearchBar}
+            />
           </Grid>
+
           <Grid item>
             <Link href="/">
               <CustomButton icon="filter">Filter</CustomButton>
@@ -168,7 +223,7 @@ const About = () => {
           </Grid>
         </Grid>
       </Box>
-        <Grid container>{albumList.length > 0 && displayedAlbums}</Grid>
+      <Grid container>{albumList.length > 0 && displayedAlbums}</Grid>
     </Container>
   );
 };

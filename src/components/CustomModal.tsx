@@ -4,7 +4,6 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 interface Props {
-  // handleOpen: () => boolean,
   handleClose: () => void,
   open: boolean,
   position: number,
@@ -16,7 +15,6 @@ interface Props {
 }
 
 const CustomModal: React.FC<Props> = ({ open, handleClose, nextHandler, previousHandler, position, handleSubmit, arrayLength, currentAlbum }: any) => {
-  // const [position, setPosition] = useState(0);
   const style = {
     position: "absolute",
     top: "30%",
@@ -30,14 +28,9 @@ const CustomModal: React.FC<Props> = ({ open, handleClose, nextHandler, previous
     p: 4
   };
 
-  console.log('pos', position)
   const disableRightButton = position === arrayLength - 1;
   const disableLeftButton = position === 0;
-  console.log("pos", disableRightButton, position, arrayLength - 1);
 
-  // const handleNextAlbum = () => setPosition(previousValue => ++previousValue);
-  // const handlePreviousAlbum = () =>
-  //   setPosition(previousValue => --previousValue);
   console.log("nimmmmm", position);
   return (
     <>

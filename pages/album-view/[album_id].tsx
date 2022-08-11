@@ -125,7 +125,8 @@ const albumView: React.FC<Props> = ({ id }: any) => {
               alignItems: "center",
               flexWrap: "wrap",
               cursor: "pointer",
-              mt: 2
+              mt: 2,
+              mb:2 
             }}
           >
             <ArrowBackIcon sx={{mr: .5}} />
