@@ -45,7 +45,6 @@ async function getAlbums(req, res) {
 
 // Adding a new post
 async function addAlbum(req, res) {
-    console.log('reqq',req.body)
     try {
         let { db } = await connectToDatabase();
         await db.collection('TestCollection').insertOne(JSON.parse(req.body));
@@ -64,7 +63,6 @@ async function addAlbum(req, res) {
 // Updating a post
 async function updatePost(req, res) {
     const body = JSON.parse(req.body)
-    console.log('qqqq',JSON.parse(req.body))
     try {
         let { db } = await connectToDatabase();
 

@@ -5,20 +5,14 @@ import {
   Button,
   Link,
   Box,
-  Paper,
   Card,
   CardContent,
   Typography,
   InputAdornment
 } from "@mui/material";
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import { ConsoleWriter } from "istanbul-lib-report";
-import theme from "../src/theme";
 
 const AddAlbum = () => {
-  const [albumText, setAlbumText] = useState("");
-  const [artistText, setArtistText] = useState("");
-  const [genreText, setGenreText] = useState("");
   const [fullAlbum, setFullAlbum] = useState({
     artistName: "",
     albumName: "",
@@ -42,11 +36,6 @@ const AddAlbum = () => {
   const handlePost = async (e: any) => {
     e.preventDefault();
 
-    // let album = {
-    //   albumName: albumText,
-    //   artistName: artistText,
-    //   genre: genreText
-    // };
     // save the post
     let response = await fetch("/api/albums", {
       method: "POST",
@@ -70,22 +59,6 @@ const AddAlbum = () => {
       discogsUrl: ""
     });
     return data;
-  };
-
-  const artistType = (e: any) => {
-    console.log(e.target.name);
-    e.preventDefault();
-    setArtistText(e.target.value);
-  };
-
-  const albumType = (e: any) => {
-    e.preventDefault();
-    setAlbumText(e.target.value);
-  };
-
-  const genreType = (e: any) => {
-    e.preventDefault();
-    setGenreText(e.target.value);
   };
 
   return (

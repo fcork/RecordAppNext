@@ -1,11 +1,8 @@
 import React from "react";
 import {
   Card,
-  CardActions,
-  CardMedia,
   CardContent,
   CardActionArea,
-  Box,
   Typography
 } from "@mui/material/";
 import Image from "next/image";
@@ -26,30 +23,20 @@ const AlbumCardList: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <Card sx={{ border: "none", boxShadow: "none"}}>
+      <Card sx={{ border: "none", boxShadow: "none" }}>
         <CardActionArea
           sx={{
             pb: 1.5
           }}
         >
-          <CardContent sx={{display: "flex",}}>
-            {isStoryBook ? (
-              <img
-                src={imageFile}
-                height={116}
-                width={116}
-                alt="StorybookAlt"
-              />
-            ) : (
-              <Image
-                style={{ display: "flex" }}
-                priority
-                src={imageFile}
-                height={116}
-                width={116}
-                alt="AppAlt"
-              />
-            )}
+          <CardContent sx={{ display: "flex" }}>
+            <img
+              style={{ display: "flex" }}
+              src={imageFile}
+              height={116}
+              width={116}
+              alt="AppAlt"
+            />
 
             <CardContent
               sx={{

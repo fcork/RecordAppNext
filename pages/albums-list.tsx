@@ -1,8 +1,5 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-// import Link from '../src/Link';
-import ProTip from "../src/ProTip";
-import Copyright from "../src/Copyright";
 import AlbumCard from "../src/components/AlbumCard";
 import { Grid, Box, Button, Container, Typography } from "@mui/material";
 import SearchBox from "../src/components/SearchBox";
@@ -102,7 +99,7 @@ const About = () => {
     <Link href={`/album-view/${album._id}`} key={album._id}>
       <Grid item xs={12} sm={6} md={4}>
         <AlbumCardList
-          imageFile="/images/PetSoundsCover.jpg"
+          imageFile={album.albumArtworkUrl}
           albumInfo={album}
         />
       </Grid>
@@ -170,9 +167,6 @@ const About = () => {
             <ListView color={grid.listColor} handleClick={toggleList} />
           </Grid>
         </Grid>
-
-        {/* <ProTip />
-        <Copyright /> */}
       </Box>
         <Grid container>{albumList.length > 0 && displayedAlbums}</Grid>
     </Container>
