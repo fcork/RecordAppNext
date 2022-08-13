@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, SetStateAction } from "react";
 import AlbumCard from "../src/components/AlbumCard";
 import {
   Grid,
@@ -29,9 +29,26 @@ import AlbumCardList from "../src/components/AlbumCardList";
 //   };
 // }
 
+interface Albums {
+      _id: string
+      artistName: string,
+      albumName: string,
+      genre: string,
+      length: string,
+      releaseDate: string,
+      pricePaid: string,
+      label: string,
+      deadWaxInfo: string,
+      pressingYear: string,
+      country: string,
+      notes: string,
+      discogsUrl: string,
+      albumArtworkUrl: string
+}
+
 const About = () => {
-  const [unfilteredAlbumList, setUnfilteredAlbumList] = useState([])
-  const [albumList, setAlbumList] = useState([]);
+  const [unfilteredAlbumList, setUnfilteredAlbumList] = useState<Albums[]>([])
+  const [albumList, setAlbumList] = useState<Albums[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
   const [grid, setGrid] = useState({
@@ -158,7 +175,9 @@ const About = () => {
           album.artistName.toLowerCase().includes(searchText) ||
           album.albumName.toLowerCase().includes(searchText)
       );
-      setAlbumList(result);
+      
+      // setAlbumList(result: string) => void;
+      setAlbumList(result)
     }
       handleSearch()
   }, [searchText])

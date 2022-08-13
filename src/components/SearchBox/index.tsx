@@ -5,7 +5,13 @@ import Search from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 import IconButton from '@mui/material/IconButton';
 
-const SearchBox = ({ handleSearchChange, searchText, clearSearchBar }) => {
+interface Props{
+  searchText: string,
+  handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => Promise<void>,
+  clearSearchBar: () => void
+}
+
+const SearchBox: React.FC<Props> = ({ searchText, handleSearchChange, clearSearchBar }: any) => {
   return (
     <TextField
       label="Search"
@@ -31,4 +37,4 @@ const SearchBox = ({ handleSearchChange, searchText, clearSearchBar }) => {
   );
 };
 
-export default SearchBox;
+export default SearchBox
