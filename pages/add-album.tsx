@@ -2,23 +2,21 @@ import React, { useState } from "react";
 import CustomButton from "../src/components/CustomButton";
 import {
   TextField,
-  Button,
   Link,
-  Box,
-  Paper,
   Card,
   CardContent,
   Typography,
-  InputAdornment
+  InputAdornment,
+  Box
 } from "@mui/material";
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import { ConsoleWriter } from "istanbul-lib-report";
-import theme from "../src/theme";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import AlbumForm from "../src/components/AlbumForm";
+
+// export async function getServerSideProps(context: any) {
+//   const
+// }
 
 const AddAlbum = () => {
-  const [albumText, setAlbumText] = useState("");
-  const [artistText, setArtistText] = useState("");
-  const [genreText, setGenreText] = useState("");
   const [fullAlbum, setFullAlbum] = useState({
     artistName: "",
     albumName: "",
@@ -42,11 +40,6 @@ const AddAlbum = () => {
   const handlePost = async (e: any) => {
     e.preventDefault();
 
-    // let album = {
-    //   albumName: albumText,
-    //   artistName: artistText,
-    //   genre: genreText
-    // };
     // save the post
     let response = await fetch("/api/albums", {
       method: "POST",
@@ -72,27 +65,11 @@ const AddAlbum = () => {
     return data;
   };
 
-  const artistType = (e: any) => {
-    console.log(e.target.name);
-    e.preventDefault();
-    setArtistText(e.target.value);
-  };
-
-  const albumType = (e: any) => {
-    e.preventDefault();
-    setAlbumText(e.target.value);
-  };
-
-  const genreType = (e: any) => {
-    e.preventDefault();
-    setGenreText(e.target.value);
-  };
-
   return (
     <>
       <Card>
         <CardContent>
-          <Typography>General</Typography>
+          {/* <Typography>General</Typography>
           <TextField
             sx={{ mb: 2 }}
             id="outlined-basic"
@@ -234,9 +211,19 @@ const AddAlbum = () => {
             name="notes"
             multiline
             minRows="3"
+          /> */}
+
+          <Box sx={{display: "flex", justifyContent: "center"}}>
+          <Typography variant="h5">Add Album Info Below</Typography>
+          </Box>
+          
+
+          <AlbumForm
+            fullAlbum={fullAlbum}
+            handleAlbumChange={handleAlbumChange}
           />
 
-          <CustomButton onClick={handlePost} icon="add">
+          <CustomButton onClick={handlePost} icon="add" variant="contained">
             Add Album
           </CustomButton>
 

@@ -17,7 +17,7 @@ async function getAlbum(req, res) {
         let { db } = await connectToDatabase();
         let posts = await db
             .collection('TestCollection')
-            .findOne({_id: new ObjectId(id)})
+            .findOne({_id: new ObjectId(id) }, {projection:{ _id: 0 }})
         return res.json({
             message: JSON.parse(JSON.stringify(posts)),
             success: true,

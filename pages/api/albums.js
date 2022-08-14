@@ -45,7 +45,6 @@ async function getAlbums(req, res) {
 
 // Adding a new post
 async function addAlbum(req, res) {
-    console.log('reqq',req.body)
     try {
         let { db } = await connectToDatabase();
         await db.collection('TestCollection').insertOne(JSON.parse(req.body));
@@ -63,14 +62,15 @@ async function addAlbum(req, res) {
 
 // Updating a post
 async function updatePost(req, res) {
+    const body = JSON.parse(req.body)
     try {
         let { db } = await connectToDatabase();
 
         await db.collection('TestCollection').updateOne(
             {
-                _id: new ObjectId(req.body),
+                _id: new ObjectId(req.query),
             },
-            { $set: { published: true } }
+            { $set:  body  }
         );
 
         return res.json({
@@ -87,11 +87,12 @@ async function updatePost(req, res) {
 
 // deleting a post
 async function deletePost(req, res) {
+    const body = JSON.parse(req.body)
     try {
         let { db } = await connectToDatabase();
 
         await db.collection('TestCollection').deleteOne({
-            _id: new ObjectId(req.body),
+            _id: new ObjectId(body),
         });
 
         return res.json({

@@ -19,12 +19,12 @@ const Home = () => {
         }}
       >
         <Typography variant="h4" component="h1" gutterBottom>
-          MUI v5 + Next.js with TypeScript example
+          Welcome to the Record Collector App
         </Typography>
         <Link href="/albums-list" color="primary">
           Go to the album page
         </Link>
-        <Link href="/addAlbum" color="primary">
+        <Link href="/add-album" color="primary">
           Add an album
         </Link>
         <ProTip />

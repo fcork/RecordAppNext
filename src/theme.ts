@@ -1,5 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
+import { fontSize } from '@mui/system';
 
 const colors = {
   primary: '#19857b',
@@ -25,6 +26,15 @@ const theme = createTheme({
       fontSize: '0.8125rem',
       fontWeight: 400,
     },
+    h5: {
+      fontSize: '1.5rem',
+    fontWeight: 800
+    },
+    h6: {
+      fontSize: '1rem',
+    fontWeight: 800
+    }
+    
     
   }
 });

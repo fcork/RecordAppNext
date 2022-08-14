@@ -5,4 +5,4 @@ export default {
   component: CustomButton
 }
 
-export const filter = () => <CustomButton icon="filter">Filter</CustomButton>
+export const filter = () => <CustomButton variant="contained" icon="filter">Filter</CustomButton>
