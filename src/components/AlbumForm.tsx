@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import CustomButton from "../src/components/CustomButton";
 import {
   TextField,
   Link,
@@ -10,7 +9,7 @@ import {
 } from "@mui/material";
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
-interface Props{
+interface Props {
   fullAlbum: {
     artistName: string,
     albumName:string,
@@ -24,7 +23,8 @@ interface Props{
     country: string,
     notes: string,
     discogsUrl: string
-  }
+  },
+  handleAlbumChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const AlbumForm: React.FC<Props> = ({fullAlbum, handleAlbumChange}:any) => {

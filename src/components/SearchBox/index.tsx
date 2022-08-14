@@ -5,7 +5,7 @@ import Search from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 import IconButton from '@mui/material/IconButton';
 
-interface Props{
+interface Props {
   searchText: string,
   handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => Promise<void>,
   clearSearchBar: () => void

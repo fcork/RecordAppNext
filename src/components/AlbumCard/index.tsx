@@ -1,12 +1,8 @@
 import React from "react";
 import {
   Card,
-  CardActions,
-  CardMedia,
   CardContent,
   CardActionArea,
-  Box,
-  Typography,
   Skeleton
 } from "@mui/material/";
 import Image from "next/image";
