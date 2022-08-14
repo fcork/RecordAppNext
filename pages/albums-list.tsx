@@ -1,14 +1,7 @@
 import * as React from "react";
 import { useState, useEffect, SetStateAction } from "react";
 import AlbumCard from "../src/components/AlbumCard";
-import {
-  Grid,
-  Box,
-  Button,
-  Container,
-  Typography,
-  TextField
-} from "@mui/material";
+import { Grid, Box, Container, Typography } from "@mui/material";
 import SearchBox from "../src/components/SearchBox";
 import CustomButton from "../src/components/CustomButton";
 import GridView from "../src/components/GridView";
@@ -30,24 +23,24 @@ import AlbumCardList from "../src/components/AlbumCardList";
 // }
 
 interface Albums {
-      _id: string
-      artistName: string,
-      albumName: string,
-      genre: string,
-      length: string,
-      releaseDate: string,
-      pricePaid: string,
-      label: string,
-      deadWaxInfo: string,
-      pressingYear: string,
-      country: string,
-      notes: string,
-      discogsUrl: string,
-      albumArtworkUrl: string
+  _id: string;
+  artistName: string;
+  albumName: string;
+  genre: string;
+  length: string;
+  releaseDate: string;
+  pricePaid: string;
+  label: string;
+  deadWaxInfo: string;
+  pressingYear: string;
+  country: string;
+  notes: string;
+  discogsUrl: string;
+  albumArtworkUrl: string;
 }
 
 const About = () => {
-  const [unfilteredAlbumList, setUnfilteredAlbumList] = useState<Albums[]>([])
+  const [unfilteredAlbumList, setUnfilteredAlbumList] = useState<Albums[]>([]);
   const [albumList, setAlbumList] = useState<Albums[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
@@ -56,62 +49,17 @@ const About = () => {
     gridColor: "primary",
     listColor: "secondary"
   });
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(`api/albums`);
       const newData = await response.json();
       await setIsLoading(false);
       setAlbumList(newData.message);
-      setUnfilteredAlbumList(newData.message)
+      setUnfilteredAlbumList(newData.message);
     };
-
     fetchData();
-
-    // const NewFetchSpot = async () => {
-    //   const accessToken = "BQBUVcYEr1Yxu-ZOXN28nPKOGbP1B79zaKeKSa4r3k0J9nnc-RaSgli8lZbMxbVGpHBNQ4zdS506Witqtm04OmBBXJa4oG-Qeq1PHaJESOOUxHBvSDDlMhKFUhpQjxjuBvugd3zGeFiRLDXkngtp2-tSMjjyxKNevXPFsKkAChVUkfI"
-    //   const response = await fetch('https://api.spotify.com/v1/search?type=album&q=year:1968%20artist:The%20Rolling%20Stones', {
-    //         method: 'GET', headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json',
-    //             'Authorization': 'Bearer ' + accessToken
-    //         }
-    //     })
-
-    //         const newData = await response.json();
-    //    console.log('wwww',newData.albums.items)
-    // }
-
-    // NewFetchSpot()
-    // fetchSpotData();
-
-    // const fetchSpotData = async () => {
-    //   const response = await fetch('https://api.spotify.com/v1/search?q=tania%20bowra&type=artist', {
-    //     headers: {
-    //       Authentication: token
-    //     }
-    //   })
-    //   const newData = await response.json();
-    //    console.log('wwww',newData)
-    // };
-
-    // fetchSpotData();
   }, []);
-
-  //   const handlePost = async (e) => {
-  //     e.preventDefault();
-
-  //     let album = {
-  //         albumName: 'Revolver',
-  //         artistName: 'The Beatles'
-  //     };
-  //     // save the post
-  //     let response = await fetch('/api/albums');
-
-  //     // get the data
-  //     let data = await response.json();
-  //     setAlbumList(data.message)
-  //     return data
-  // };
 
   const displayedGridAlbums = albumList.map((album: any) => (
     <Link href={`/album-view/${album._id}`} key={album._id}>
@@ -145,27 +93,9 @@ const About = () => {
     setGrid({ isGrid: true, gridColor: "primary", listColor: "secondary" });
   };
 
-  // const handleSearch = () => {
-  //   const result = unfilteredAlbumList.filter(
-  //     album =>
-  //       album.artistName.toLowerCase().includes(searchText) ||
-  //       album.albumName.toLowerCase().includes(searchText)
-  //   );
-  //   setAlbumList(result);
-  // };
-
   const handleSearchChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    console.log(e.target.value)
-    await setSearchText(e.target.value.toLocaleLowerCase())
-    console.log('search',searchText)
-    // const result =  await unfilteredAlbumList.filter(
-    //   album =>
-    //     album.artistName.toLowerCase().includes(searchText) ||
-    //     album.albumName.toLowerCase().includes(searchText)
-    // );
-    // await setAlbumList(result);
-  
+    await setSearchText(e.target.value.toLocaleLowerCase());
   };
 
   useEffect(() => {
@@ -175,30 +105,28 @@ const About = () => {
           album.artistName.toLowerCase().includes(searchText) ||
           album.albumName.toLowerCase().includes(searchText)
       );
-      
-      // setAlbumList(result: string) => void;
-      setAlbumList(result)
-    }
-      handleSearch()
-  }, [searchText])
+      setAlbumList(result);
+    };
+    handleSearch();
+  }, [searchText]);
 
   const clearSearchBar = () => {
-    setAlbumList(unfilteredAlbumList)
-    setSearchText("")
-  }
+    setAlbumList(unfilteredAlbumList);
+    setSearchText("");
+  };
 
   return (
     <Container maxWidth="lg">
       <Box
         sx={{
-          my: 4,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center"
+          mt: 4,
+          // display: "flex",
+          // flexDirection: "column",
+          // justifyContent: "center",
+          // alignItems: "center"
         }}
       >
-        <Box>
+        {/* <Box>
           <Typography
             style={{
               fontSize: "2.5rem",
@@ -209,16 +137,35 @@ const About = () => {
           >
             Franks Albums
           </Typography>
-        </Box>
+        </Box> */}
 
         <Grid
           container
-          spacing={4}
+          spacing={1}
           direction="column"
-          justifyContent="flex-end"
-          alignItems="stretch"
+          // justifyContent="flex-end"
+          // alignItems="stretch"
         >
-          <Grid item xs={12}>
+          <Grid item sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            mb: 3
+          }}>
+            <Typography
+              style={{
+                fontSize: "2.5rem",
+                fontWeight: "1000",
+                lineHeight: "20px"
+              }}
+              
+            >
+              Franks Albums
+            </Typography>
+          </Grid>
+
+          <Grid item xs={12} sx={{mb: 1}}>
             <SearchBox
               handleSearchChange={handleSearchChange}
               searchText={searchText}
@@ -226,23 +173,29 @@ const About = () => {
             />
           </Grid>
 
-          <Grid item>
-            <Link href="/">
-              <CustomButton icon="filter">Filter</CustomButton>
+          <Grid item xs={12}>
+            <Link href="/" passHref>
+              <CustomButton variant="contained" icon="filter">
+                Filter
+              </CustomButton>
             </Link>
+          </Grid>
+          <Grid item sx={{pb: 0, display: "flex", justifyContent: "flex-end"}}>
+          <GridView color={grid.gridColor} handleClick={toggleGrid} />
+          <ListView color={grid.listColor} handleClick={toggleList} />
           </Grid>
         </Grid>
 
-        <Grid container justifyContent="flex-end">
-          <Grid item>
-            <GridView color={grid.gridColor} handleClick={toggleGrid} />
-          </Grid>
-          <Grid item>
-            <ListView color={grid.listColor} handleClick={toggleList} />
-          </Grid>
-        </Grid>
+        {/* <Grid item sx={{display: "flex", justifyContent: "flex-end"}}> */}
+          {/* <Grid item> */}
+            {/* <GridView color={grid.gridColor} handleClick={toggleGrid} /> */}
+          {/* </Grid> */}
+          {/* <Grid item> */}
+            {/* <ListView color={grid.listColor} handleClick={toggleList} /> */}
+          {/* </Grid> */}
+        {/* </Grid> */}
       </Box>
-      <Grid container>{albumList.length > 0 && displayedAlbums}</Grid>
+      <Grid sx={{pt: 0}} container>{albumList.length > 0 && displayedAlbums}</Grid>
     </Container>
   );
 };

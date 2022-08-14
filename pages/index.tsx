@@ -24,7 +24,7 @@ const Home = () => {
         <Link href="/albums-list" color="primary">
           Go to the album page
         </Link>
-        <Link href="/addAlbum" color="primary">
+        <Link href="/add-album" color="primary">
           Add an album
         </Link>
         <ProTip />

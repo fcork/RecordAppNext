@@ -31,7 +31,6 @@ const CustomModal: React.FC<Props> = ({ open, handleClose, nextHandler, previous
   const disableRightButton = position === arrayLength - 1;
   const disableLeftButton = position === 0;
 
-  console.log("nimmmmm", position);
   return (
     <>
       <Modal

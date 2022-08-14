@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import CustomButton from "../src/components/CustomButton";
 import {
   TextField,
-  Button,
   Link,
-  Box,
   Card,
   CardContent,
   Typography,
-  InputAdornment
+  InputAdornment,
+  Box
 } from "@mui/material";
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import AlbumForm from "../src/components/AlbumForm";
+
+// export async function getServerSideProps(context: any) {
+//   const
+// }
 
 const AddAlbum = () => {
   const [fullAlbum, setFullAlbum] = useState({
@@ -65,7 +69,7 @@ const AddAlbum = () => {
     <>
       <Card>
         <CardContent>
-          <Typography>General</Typography>
+          {/* <Typography>General</Typography>
           <TextField
             sx={{ mb: 2 }}
             id="outlined-basic"
@@ -207,9 +211,19 @@ const AddAlbum = () => {
             name="notes"
             multiline
             minRows="3"
+          /> */}
+
+          <Box sx={{display: "flex", justifyContent: "center"}}>
+          <Typography variant="h5">Add Album Info Below</Typography>
+          </Box>
+          
+
+          <AlbumForm
+            fullAlbum={fullAlbum}
+            handleAlbumChange={handleAlbumChange}
           />
 
-          <CustomButton onClick={handlePost} icon="add">
+          <CustomButton onClick={handlePost} icon="add" variant="contained">
             Add Album
           </CustomButton>
 

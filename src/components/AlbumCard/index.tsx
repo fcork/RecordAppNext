@@ -45,23 +45,14 @@ const AlbumCard: React.FC<Props> = ({
               height={144}
             />
           ) : (
-            <CardContent sx={{ pb: 1.5 }}>
-              {isStoryBook ? (
-                <img
-                  src={imageFile}
-                  height={144}
-                  width={144}
-                  alt="StorybookAlt"
-                />
-              ) : (
+            <CardContent sx={{ margin: 0 }}>
                 <img
                   style={{ display: "flex" }}
                   src={imageFile}
-                  height={144}
-                  width={144}
+                  height={156}
+                  width={156}
                   alt="AppAlt"
                 />
-              )}
             </CardContent>
           )}
           {skeleton ? (

@@ -1,7 +1,5 @@
 import * as React from 'react';
-import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -22,16 +20,16 @@ const icons: iconsInt = {
   add: <AddIcon />
 }
 
-
 const CustomButton: React.FC<Props> = (props: any) => {
-  const { children, icon } = props
+  const { children, icon, variant } = props
   const currentIcon=icons[icon]
+
   return (
     <Button
       {...props}
       role="button"
       sx={{ padding: '16px', borderRadius: '8px' }}
-      variant="contained"
+      // variant="contained"
       color="primary"
       fullWidth
       startIcon={currentIcon}

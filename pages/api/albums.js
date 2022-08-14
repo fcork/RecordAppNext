@@ -87,11 +87,12 @@ async function updatePost(req, res) {
 
 // deleting a post
 async function deletePost(req, res) {
+    const body = JSON.parse(req.body)
     try {
         let { db } = await connectToDatabase();
 
         await db.collection('TestCollection').deleteOne({
-            _id: new ObjectId(req.body),
+            _id: new ObjectId(body),
         });
 
         return res.json({

@@ -7,13 +7,15 @@ import {
   Box,
   Container,
   Button,
-  Modal
+  Modal,
+  IconButton
 } from "@mui/material";
 import CustomButton from "../../src/components/CustomButton";
 import theme from "../../src/theme";
 import Link from "next/link";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CustomModal from "../../src/components/CustomModal";
+import EditIcon from "@mui/icons-material/Edit";
 
 interface Props {}
 
@@ -55,7 +57,7 @@ const albumView: React.FC<Props> = ({ id }: any) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`/api/album/?id=${id}`);
+      const res = await fetch(`/api/album?id=${id}`);
       const newData = await res.json();
       setAlbum(newData.message);
     };
@@ -114,22 +116,29 @@ const albumView: React.FC<Props> = ({ id }: any) => {
     await handleClose();
   };
 
+  const handleDelete = async () => {
+    await fetch(`/api/albums/?id=${id}`, {
+      method: "DELETE",
+      body: JSON.stringify( id )
+    });
+  }
+
   return (
     <>
       <Container maxWidth="md">
         <Link href="/albums-list">
           <Box
             sx={{
-              marginRight: "auto",
               display: "flex",
-              alignItems: "center",
-              flexWrap: "wrap",
               cursor: "pointer",
               mt: 2,
-              mb:2 
+              mb: 2
+              // marginRight: "auto",
+              // alignItems: "center",
+              // flexWrap: "wrap",
             }}
           >
-            <ArrowBackIcon sx={{mr: .5}} />
+            <ArrowBackIcon sx={{ mr: 0.5 }} />
             <Typography>Back to albums</Typography>
           </Box>
         </Link>
@@ -143,8 +152,8 @@ const albumView: React.FC<Props> = ({ id }: any) => {
           }}
           spacing={3}
         >
-          <Grid>
-            <Typography>
+          <Grid item>
+            <Typography variant="h5">
               {albumData.artistName} - {albumData.albumName}
             </Typography>
           </Grid>
@@ -156,15 +165,22 @@ const albumView: React.FC<Props> = ({ id }: any) => {
               alt="viewAlt"
             />
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={11}>
             <Box>
-              <CustomButton>View Album Art</CustomButton>
+              <CustomButton variant="contained">View Album Art</CustomButton>
             </Box>
           </Grid>
-          <Grid item xs={10}>
-            <Typography>General</Typography>
+          <Grid item xs={11}>
+            <Box sx={{ display: "flex" }}>
+              <Typography variant="h6">General</Typography>
+              <Link href={`/edit-album/${id}`}>
+                <IconButton sx={{ ml: "auto", padding: 0.5 }}>
+                  <EditIcon />
+                </IconButton>
+              </Link>
+            </Box>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={11}>
             <Card sx={{ background: theme.palette.primary.light }}>
               <CardContent>
                 <Typography>Genre: {albumData.genre}</Typography>
@@ -174,10 +190,10 @@ const albumView: React.FC<Props> = ({ id }: any) => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={10}>
-            <Typography>Pressing/Variation Info</Typography>
+          <Grid item xs={11}>
+            <Typography variant="h6">Pressing/Variation Info</Typography>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={11}>
             <Card sx={{ background: theme.palette.primary.light }}>
               <CardContent>
                 <Typography>Label: {albumData.label}</Typography>
@@ -187,10 +203,10 @@ const albumView: React.FC<Props> = ({ id }: any) => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={10}>
-            <Typography>Notes</Typography>
+          <Grid item xs={11}>
+            <Typography variant="h6">Notes</Typography>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={11}>
             <Card
               sx={{ background: theme.palette.primary.light, height: "100%" }}
             >
@@ -199,18 +215,20 @@ const albumView: React.FC<Props> = ({ id }: any) => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={11}>
             <a
               href={albumData.discogsUrl}
               target="_blank"
               rel="noopener noreferrer"
               style={{ textDecoration: "none" }}
             >
-              <CustomButton>View Discogs Link</CustomButton>
+              <CustomButton variant="contained">View Discogs Link</CustomButton>
             </a>
           </Grid>
-          <Grid item xs={10}>
-            <Button onClick={handleOpen}>Open modal</Button>
+          <Grid item xs={11}>
+            <CustomButton variant="outlined" onClick={handleOpen}>
+              Get Album Artwork
+            </CustomButton>
 
             <CustomModal
               open={artModal}
@@ -223,98 +241,14 @@ const albumView: React.FC<Props> = ({ id }: any) => {
               arrayLength={albumsArray.length}
             />
           </Grid>
+          <Grid item xs={10}>
+          <Button onClick={handleDelete}>
+            Delete
+          </Button>
+          </Grid>
         </Grid>
       </Container>
-
-      {/* <div>
-      <Button onClick={handleOpen}>Open modal</Button>
-      <Modal
-        open={artModal}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal>
-    </div> */}
     </>
-
-    // <Container maxWidth="md">
-    // <Card sx={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
-    //   <CardContent sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-    //     <Image
-    //       src="/images/PetSoundsCover.jpg"
-    //       height={324}
-    //       width={324}
-    //       alt="viewAlt"
-    //     />
-
-    //     <CustomButton sx={{flexGrow: "1"}}>Click</CustomButton>
-    //   </CardContent>
-    //   <CardContent >
-
-    //   </CardContent>
-    // </Card>
-    // </Container>
-
-    // <Box
-    //   sx={{
-    //     display: "flex",
-    //     alignItems: "center",
-    //     height: "100vh",
-    //     justifyContent: "center",
-    //     flexDirection: "column"
-    //   }}
-    // >
-    //   <Box sx={{ mb: "auto" }}>Hello</Box>
-    //   <Box>Hello</Box>
-    // </Box>
-
-    // <>
-    //   <Container maxWidth="lg">
-    //     <Box
-    //       sx={{
-    //         display: "flex",
-    //         flexDirection: "column",
-    //         alignItems: "center"
-    //       }}
-    //     >
-    //       <Image
-    //         src="/images/PetSoundsCover.jpg"
-    //         height={324}
-    //         width={324}
-    //         alt="viewAlt"
-    //       />
-
-    //       <CustomButton>View Album Art</CustomButton>
-    //       <Box sx={{margin: "auto"}}>
-    //         <Card>
-    //           <CardContent>
-    //             <Typography>Genre:</Typography>
-    //             <Typography>Length:</Typography>
-    //             <Typography>Release Date:</Typography>
-    //             <Typography>Price Paid:</Typography>
-    //           </CardContent>
-    //         </Card>
-    //       </Box>
-    //     </Box>
-    //   </Container>
-    //   <Card>
-    //     <CardContent>
-    //       <Typography>Genre:</Typography>
-    //       <Typography>Length:</Typography>
-    //       <Typography>Release Date:</Typography>
-    //       <Typography>Price Paid:</Typography>
-    //     </CardContent>
-    //   </Card>
-    // </>
   );
 };
 
